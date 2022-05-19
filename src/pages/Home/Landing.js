@@ -37,8 +37,6 @@ const Landing = () => {
             </div>
 
             <div
-                data-aos="fade-up"
-                data-aos-duration="1500"
                 className='shadow-sm p-5 lg:p-10 md:p-8 relative w-5/6 mx-auto rounded-2xl lg:mt-[-75px] md:mt-[-100px] sm:mt-[-75px] mt-[-70px] bg-base-200 z-20 '>
                 <h1 className='text-start text-2xl text-primary mb-2'>Get Free Estimate</h1>
                 <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4'>
@@ -57,6 +55,7 @@ const Landing = () => {
                     <input type="text" placeholder="Type here" class="input input-bordered w-full " />
 
                     <input type="text" placeholder="Type here" class="input input-bordered w-full " />
+                    
                 </div>
                 <button className='btn btn-primary mt-5'>Request a Quote</button>
             </div>
