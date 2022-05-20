@@ -1,14 +1,31 @@
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import useAdmin from '../hooks/useAdmin';
 
 const Navbar = ({ children }) => {
     const [dark, setDark] = useState(false);
+    const { pathname } = useLocation()
+    const [admin] = useAdmin()
 
     return (
         <div class="drawer drawer-end" data-theme={dark ? "dark" : "light"}>
             <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
             <div class="drawer-content flex flex-col">
                 <div class="w-full fixed top-0 navbar bg-base-100 lg:px-20 z-50">
+
+                    {
+                        pathname.includes("dashboard") && (
+                            <label tabindex="0" for="my-drawer-2" class="btn btn-ghost lg:hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-5 w-5"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+                            </label>
+                        )
+                    }
+
                     <div class="flex-1 px-2 mx-2 text-2xl"><Link to={'/'}>Clean Co.</Link></div>
                     <div class="flex-none lg:hidden">
                         <label for="my-drawer-3" class="btn btn-square btn-ghost">
@@ -19,6 +36,10 @@ const Navbar = ({ children }) => {
                         <ul class="menu menu-horizontal gap-x-2">
                             <li><Link to={'/'} className='rounded-lg'>Home</Link></li>
 
+                            {
+                                admin && <li><NavLink to={'/dashboard'} className='rounded-lg'>Dashboard</NavLink></li>
+                            }
+
                             <li><NavLink to={'/about'} className='rounded-lg '>About</NavLink></li>
 
                             <li><NavLink to={'/services'} className='rounded-lg'>Services</NavLink></li>
@@ -26,10 +47,6 @@ const Navbar = ({ children }) => {
                             <li><NavLink to={'/contact'} className='rounded-lg'>Contact</NavLink></li>
 
                             <li><NavLink to={'/login'} className='rounded-lg'>Login</NavLink></li>
-
-                            {/*  <li>
-                                <button data-toggle-theme="dark,light" data-act-class="ACTIVECLASS">Theme</button>
-                            </li> */}
 
                             <li class="dropdown dropdown-hover dropdown-end">
                                 <label tabindex="0" class="btn btn-primary btn-outline rounded-lg">Book Now</label>
@@ -57,6 +74,9 @@ const Navbar = ({ children }) => {
                 <label for="my-drawer-3" class="drawer-overlay"></label>
                 <ul class="menu p-4 overflow-y-auto w-48 bg-base-100">
                     <li><Link to={'/'} className='rounded-lg'>Home</Link></li>
+                    {
+                        admin && <li><NavLink to={'/dashboard'} className='rounded-lg'>Dashboard</NavLink></li>
+                    }
                     <li><NavLink to={'/about'} className='rounded-lg'>About</NavLink></li>
                     <li><NavLink to={'/services'} className='rounded-lg'>Services</NavLink></li>
                     <li><NavLink to={'/contact'} className='rounded-lg'>Contact</NavLink></li>
